@@ -8,6 +8,11 @@ variable "region" {
   type        = string
 }
 
+variable "public_key" {
+  description = "The public key of the key used to log into the EC2 instance with."
+  type        = string
+}
+
 variable "credentials" {
   description = "The credentials for connecting to AWS."
   type = object({

@@ -31,10 +31,15 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
+resource "aws_key_pair" "user_login" {
+  key_name   = "user_login"
+  public_key = var.public_key
+}
+
 resource "aws_instance" "server" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
-
+  key_name      = aws_key_pair.user_login.key_name
   tags = {
     Name = var.name
   }
