@@ -10,8 +10,9 @@ terraform {
 }
 
 provider "aws" {
-  profile = "default"
-  region  = "eu-west-3"
+  region     = var.region
+  access_key = var.credentials.access_key
+  secret_key = var.credentials.secret_key
 }
 
 data "aws_ami" "ubuntu" {
