@@ -32,7 +32,7 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_key_pair" "user_login" {
-  key_name   = "user_login"
+  key_name   = "${var.name}-user-login"
   public_key = var.public_key
 }
 
