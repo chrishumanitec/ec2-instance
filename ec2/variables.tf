@@ -21,3 +21,30 @@ variable "credentials" {
   })
   sensitive = true
 }
+
+
+variable "spec" {
+  description = "The workload details"
+  type = object({
+    containers = object({
+      image = object({
+        files         = map(any)
+        id            = string
+        image         = string
+        resources     = map(any)
+        variables     = map(string)
+        volume_mounts = map(any)
+      })
+    })
+  })
+}
+
+variable "profile" {
+  description = "The Workload Profile of the workload"
+  type        = string
+}
+
+variable "id" {
+  description = "The ID of the workload"
+  type        = string
+}

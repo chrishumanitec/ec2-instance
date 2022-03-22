@@ -15,21 +15,6 @@ provider "aws" {
   secret_key = var.credentials.secret_key
 }
 
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["099720109477"] # Canonical
-}
 
 resource "aws_key_pair" "user_login" {
   key_name   = "${var.name}-user-login"
@@ -37,7 +22,7 @@ resource "aws_key_pair" "user_login" {
 }
 
 resource "aws_instance" "server" {
-  ami           = data.aws_ami.ubuntu.id
+  ami           = var.spec.containers.image.image
   instance_type = "t2.micro"
   key_name      = aws_key_pair.user_login.key_name
   tags = {
