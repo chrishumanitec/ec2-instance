@@ -25,6 +25,8 @@ resource "aws_instance" "server" {
   ami           = var.spec.containers.image.image
   instance_type = "t2.micro"
   key_name      = aws_key_pair.user_login.key_name
+  user_data     = local.cloud_config_config
+
   tags = {
     Name = var.name
   }
