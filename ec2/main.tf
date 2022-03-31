@@ -12,7 +12,7 @@ terraform {
 locals {
   # The container object from the workload
   container     = var.spec.containers[keys(var.spec.containers)[0]]
-  ami_id        = local.container.image
+  ami_id        = replace(local.container.image, "/^(.*:)?ami-/", "ami-")
 
   # Overrides that can be supplied by Developers
   public_key    = try(var.spec.annotations["public-key"], var.public_key)

@@ -4,7 +4,7 @@ variable "name" {
 }
 
 variable "region" {
-  description = "The region the EC2 instance should be created in."
+  description = "The AWS region the EC2 instance should be created in."
   type        = string
 }
 
@@ -14,12 +14,12 @@ variable "public_key" {
 }
 
 variable "instance_type" {
-  description = "The default instance type."
+  description = "The default EC2 instance type."
   type        = string
 }
 
 variable "subnet_id" {
-  description = "The Subnet ID to launch the instance in. Will use the default subnet in teh default VPC if omitted."
+  description = "The Subnet ID to launch the instance in. Will use the default subnet in the default VPC if omitted."
   type        = string
   default     = null
 }
@@ -46,7 +46,7 @@ variable "spec" {
   type        = any
 
   validation {
-    condition     = can(regex("^ami-", var.spec.containers[keys(var.spec.containers)[0]].image))
+    condition     = can(regex("^(.*:)?ami-", var.spec.containers[keys(var.spec.containers)[0]].image))
     error_message = "Image specified does not appear to be a valid AMI ID."
   }
 
