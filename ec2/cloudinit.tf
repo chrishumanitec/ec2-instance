@@ -3,7 +3,7 @@ locals {
     #cloud-config
     ${jsonencode({
 
-  write_files = [for filepath, filecontent in var.spec.containers.image.files :
+  write_files = [for filepath, filecontent in local.container.files :
     {
 
       path        = filepath
